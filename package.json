@@ -102,6 +102,37 @@
         "category": "chapel"
       }
     ],
+    "taskDefinitions": [
+      {
+        "type": "chapel",
+        "when": "shellExecutionSupported",
+        "required": [
+          "mainFile"
+        ],
+        "properties": {
+          "mainFile": {
+            "type": "string"
+          },
+          "arguments": {
+            "type": "array"
+          }
+        }
+      },
+      {
+        "type": "chpl-language-server",
+        "required": [
+          "command"
+        ],
+        "properties": {
+          "command": {
+            "type": "string"
+          },
+          "args": {
+            "type": "array"
+          }
+        }
+      }
+    ],
     "activationEvents": [
       "onLanguage:chapel",
       "onLanguage:chapel-ast"

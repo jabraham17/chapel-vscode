@@ -25,7 +25,7 @@ import {
   setChplHome,
 } from "./configuration";
 import { ChplCheckClient, CLSClient } from "./ChapelLanguageClient";
-import { buildTools, checkChplHome, findPossibleChplHomes } from "./ChplPaths";
+import { buildTools, checkChplHome, cloneEnv, findPossibleChplHomes } from "./ChplPaths";
 
 let chplcheckClient: ChplCheckClient;
 let clsClient: CLSClient;
@@ -174,6 +174,39 @@ export function activate(context: vscode.ExtensionContext) {
       Promise.all([chplcheckClient.start(), clsClient.start()]);
     })
   );
+
+
+// interface ChapelTaskDefinition extends vscode.TaskDefinition {
+//   mainFile: string;
+//   arguments?: string[];
+// }
+
+
+//   const taskProvider = vscode.tasks.registerTaskProvider('chapel',{
+//     provideTasks: () => {return [];},
+//     resolveTask(_task: vscode.Task): vscode.Task | undefined {
+//       const task = _task.definition.task;
+//       if (task) {
+//         const definition: ChapelTaskDefinition  = <any>_task.definition;
+//         let env = cloneEnv();
+//         env.CHPL_HOME = getChplHome();
+//         let options = { cwd: definition.cwd, env: env };
+//         let cli = `chpl ${definition.mainFile}`;
+//         if (definition.arguments) {
+//           cli += " " + definition.arguments.join(" ");
+//         }
+//         return new vscode.Task(
+//           definition,
+//           _task.scope ?? vscode.TaskScope.Workspace,
+//           "runChapelFile",
+//           "chapel",
+//           new vscode.ShellExecution(cli, { cwd: definition.cwd, env: env})
+//         );
+//       }
+//       return undefined;
+//     }
+//   });
+
 }
 
 export function deactivate() {
